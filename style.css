@@ -1,0 +1,104 @@
+/* General body styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* Section styling */
+.trendMvs,
+.popMvs,
+.trTvSh,
+.topRate {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Section title */
+.trendMvs::before {
+  content: "Trending Movies";
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  display: block;
+}
+.popMvs::before {
+  content: "Popular Movies";
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  display: block;
+}
+.trTvSh::before {
+  content: "Trending TV Shows";
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  display: block;
+}
+.topRate::before {
+  content: "Top Rated";
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* Horizontal scroll container for cards */
+.trendMvs div,
+.popMvs div,
+.trTvSh div,
+.topRate div {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar for cleaner look */
+.trendMvs div::-webkit-scrollbar,
+.popMvs div::-webkit-scrollbar,
+.trTvSh div::-webkit-scrollbar,
+.topRate div::-webkit-scrollbar {
+  display: none;
+}
+
+/* Each card styling */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 150px; /* card width */
+  background-color: #eee;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 5px;
+  display: block;
+}
+
+.card p {
+  margin: 8px 0 0 0;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Hover effect */
+.card:hover {
+  transform: scale(1.05);
+}
