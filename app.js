@@ -72,31 +72,31 @@ async function show() {
 
 window.addEventListener("load", show);
 
-// btn_trMvWeek.addEventListener("click", showData);
-// function showData(e) {
-//   e.target.classList.add("active");
-//   data_trMvWeek.classList.remove("hidden");
-//   data_trMvWeek.classList.add("show");
-
-//   btn_trMvDay.classList.remove("active");
-//   data_trMvDay.classList.remove("show");
-//   data_trMvDay.classList.add("hidden");
-// }
-
-let btn_arr = {
-  btn_trMvDay: data_trMvDay,
-  btn_trMvWeek: data_trMvWeek,
-  btn_popMv: data_popMv,
-  btn_popTvSh: data_popTvSh,
-  btn_trTvShDay: data_trTvShDay,
-  btn_trTvShWeek: data_trTvShWeek,
-  btn_topRateSh: data_topRateSh,
-  btn_topRateMv: data_topRateMv,
-};
-for (let i = 0; i < btn_arr.length; i++)
-  btn_arr[i].addEventListener("click", showData);
-
+btn_trMvWeek.addEventListener("click", showData);
 function showData(e) {
-  e.target.classList.add("show");
-  e.target.classList.remove("hidden");
+  e.target.classList.add("active");
+  data_trMvWeek.classList.remove("hidden");
+  data_trMvWeek.classList.add("show");
+
+  btn_trMvDay.classList.remove("active");
+  data_trMvDay.classList.remove("show");
+  data_trMvDay.classList.add("hidden");
 }
+
+// let btn_arr = {
+//   btn_trMvDay: data_trMvDay,
+//   btn_trMvWeek: data_trMvWeek,
+//   btn_popMv: data_popMv,
+//   btn_popTvSh: data_popTvSh,
+//   btn_trTvShDay: data_trTvShDay,
+//   btn_trTvShWeek: data_trTvShWeek,
+//   btn_topRateSh: data_topRateSh,
+//   btn_topRateMv: data_topRateMv,
+// };
+// for (let i = 0; i < btn_arr.length; i++)
+//   btn_arr[i].addEventListener("click", showData);
+
+// function showData(e) {
+//   e.target.classList.add("show");
+//   e.target.classList.remove("hidden");
+// }

@@ -113,8 +113,8 @@ body {
 /* .btns button:hover {
   background: #ddd;
 } */
-/* .btns .active {
+.btns .active {
   background: rgb(97, 92, 92);
   color: white;
   border-radius: 5px;
-} */
+}
