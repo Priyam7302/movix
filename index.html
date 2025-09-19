@@ -8,27 +8,45 @@
   </head>
   <body>
     <div class="container">
+ 
       <div class="trendMvs">
-        <div class="data_trMvDay"></div>
-        <div class="data_trMvWeek"></div>
+        <div class="btns">
+          <button class="btn_trMvDay active">Day</button>
+          <button class="btn_trMvWeek">Week</button>
+        </div>
+        <div class="data_trMvDay show"></div>
+        <div class="data_trMvWeek hidden"></div>
       </div>
 
+     
       <div class="popMvs">
-        <div class="data_popMv"></div>
+        <div class="btns">
+          <button class="btn_popMv active">Movies</button>
+          <button class="btn_popTvSh">TV Shows</button>
+        </div>
+        <div class="data_popMv show"></div>
+        <div class="data_popTvSh hidden"></div>
       </div>
 
       <div class="trTvSh">
-        <div class="data_trTvShDay"></div>
-        <div class="data_trTvShWeek"></div>
+        <div class="btns">
+          <button class="btn_trTvShDay active">Day</button>
+          <button class="btn_trTvShWeek">Week</button>
+        </div>
+        <div class="data_trTvShDay show"></div>
+        <div class="data_trTvShWeek hidden"></div>
       </div>
 
       <div class="topRate">
-        <div class="data_topRateSh"></div>
-        <div class="data_topRateMv"></div>
+        <div class="btns">
+          <button class="btn_topRateSh active">TV Shows</button>
+          <button class="btn_topRateMv">Movies</button>
+        </div>
+        <div class="data_topRateSh show"></div>
+        <div class="data_topRateMv hidden"></div>
       </div>
     </div>
 
-    <!-- <button class="day">day</button> -->
     <script src="app.js"></script>
   </body>
 </html>
