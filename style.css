@@ -110,9 +110,7 @@ body {
   border-radius: 5px;
   transition: background 0.2s ease;
 }
-/* .btns button:hover {
-  background: #ddd;
-} */
+
 .btns .active {
   background: rgb(97, 92, 92);
   color: white;

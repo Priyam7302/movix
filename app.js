@@ -2,6 +2,8 @@ let trendMvs = document.querySelector(".trendMvs");
 let popMvs = document.querySelector(".popMvs");
 let topRate = document.querySelector(".topRate");
 
+let btns = document.querySelectorAll(".btns");
+
 let btn_trMvDay = document.querySelector(".btn_trMvDay");
 let btn_trMvWeek = document.querySelector(".btn_trMvWeek");
 let btn_popMv = document.querySelector(".btn_popMv");
@@ -25,6 +27,8 @@ const base_url = "https://api.themoviedb.org/3";
 // const IMG_BASE_PATH = "https://image.tmdb.org/t/p/original/";
 const IMG_BASE_PATH = "https://image.tmdb.org/t/p/w500/";
 
+let data = [];
+
 let trMvDay = `${base_url}/trending/movie/day?language=en-US&api_key=${api_key}`;
 let trMvWeek = `${base_url}/trending/movie/week?language=en-US&api_key=${api_key}`;
 let popMv = `${base_url}/movie/popular?language=en-US&page=1&api_key=${api_key}`;
@@ -37,7 +41,7 @@ let trTvShWeek = `${base_url}/trending/tv/week?language=en-US&api_key=${api_key}
 async function fetchData(url) {
   let response = await fetch(url);
   let result = await response.json();
-  console.log(result.results);
+  // console.log(result.results);
   return result.results;
 }
 
@@ -52,51 +56,76 @@ let mv_arr = {
   data_topRateMv: topRateMv,
 };
 
+window.addEventListener("load", show);
+
 async function show() {
+  let promises = [];
   for (let key in mv_arr) {
     let container = document.querySelector(`.${key}`);
-    let res = await fetchData(mv_arr[key]);
+    let res = fetchData(mv_arr[key]);
     // console.log(res);
-    for (let j = 0; j < res.length; j++) {
+    promises.push(res);
+  }
+  data = await Promise.all(promises);
+  console.log(data);
+  printData({
+    data_trMvDay: data[0],
+    data_popMv: data[2],
+    data_trTvShDay: data[4],
+    data_topRateSh: data[6],
+  });
+}
+
+function printData(obj) {
+  for (let key in obj) {
+    let container = document.querySelector(`.${key}`);
+
+    for (let i = 0; i < obj[key].length; i++) {
       let card = document.createElement("div");
       card.classList.add("card");
       let title = document.createElement("p");
       let img = document.createElement("img");
-      title.innerText = res[j].original_title || res[j].name;
-      img.src = `${IMG_BASE_PATH}` + res[j].poster_path;
+      title.innerText = obj[key][i].original_title || obj[key][i].name;
+      img.src = `${IMG_BASE_PATH}` + obj[key][i].poster_path;
       card.append(img, title);
       container.append(card);
     }
   }
 }
 
-window.addEventListener("load", show);
+for (let i = 0; i < btns.length; i++)
+  btns[i].addEventListener("click", showThatData);
 
-btn_trMvWeek.addEventListener("click", showData);
-function showData(e) {
+function showThatData(e) {
+  let btnClass = e.target.classList[0];
+  let dataClass = btnClass.replace("btn", "data");
+
+  let parentBtns = e.target.parentElement.querySelectorAll("button");
+  parentBtns.forEach((btn) => btn.classList.remove("active"));
+
   e.target.classList.add("active");
-  data_trMvWeek.classList.remove("hidden");
-  data_trMvWeek.classList.add("show");
 
-  btn_trMvDay.classList.remove("active");
-  data_trMvDay.classList.remove("show");
-  data_trMvDay.classList.add("hidden");
+  let keys = Object.keys(mv_arr);
+  let index = keys.indexOf(dataClass);
+  console.log(index);
+
+  printData({
+    [dataClass]: data[index],
+  });
+
+  toggleContainers(dataClass);
 }
 
-// let btn_arr = {
-//   btn_trMvDay: data_trMvDay,
-//   btn_trMvWeek: data_trMvWeek,
-//   btn_popMv: data_popMv,
-//   btn_popTvSh: data_popTvSh,
-//   btn_trTvShDay: data_trTvShDay,
-//   btn_trTvShWeek: data_trTvShWeek,
-//   btn_topRateSh: data_topRateSh,
-//   btn_topRateMv: data_topRateMv,
-// };
-// for (let i = 0; i < btn_arr.length; i++)
-//   btn_arr[i].addEventListener("click", showData);
+function toggleContainers(dataClass) {
+  let parent = document.querySelector(`.${dataClass}`).parentElement;
 
-// function showData(e) {
-//   e.target.classList.add("show");
-//   e.target.classList.remove("hidden");
-// }
+  let allContainers = parent.querySelectorAll("div[class^='data_']");
+  allContainers.forEach((div) => {
+    div.classList.remove("show");
+    div.classList.add("hidden");
+  });
+
+  let activeContainer = parent.querySelector(`.${dataClass}`);
+  activeContainer.classList.remove("hidden");
+  activeContainer.classList.add("show");
+}
